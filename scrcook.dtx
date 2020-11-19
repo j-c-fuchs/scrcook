@@ -33,6 +33,7 @@
 \usepackage{scrcook}
 \usepackage{booktabs}
 \usepackage{multicol}
+\usepackage{csquotes}
 \usepackage{hyperref}
 \EnableCrossrefs
 \CodelineIndex
@@ -140,6 +141,18 @@
 %   \end{tabular}
 % \end{table}
 %
+% \DescribeMacro{\recipecompsep}
+% The recipe components are indicated by a separator,
+% a colon \enquote{:} by default.
+% The separator can be changed using |\renewcommand|:
+% \begin{verbatim}
+%   \renewcommand{\recipecompsep}{---}
+% \end{verbatim}
+% makes |\ingredients| print
+% \enquote{\usekomafont{recipecomp}{Ingredients---}}.\footnote{Note that
+% for this example, it is better to also remove the space between the
+% recipe components and the text.}
+%
 % \section{Implementation}
 % \label{sec:implementation}
 %
@@ -157,10 +170,16 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\recipecompsep}
+%    \begin{macrocode}
+\newcommand{\recipecompsep}{:}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\recipecomp}
 %    \begin{macrocode}
 \newcommand{\recipecomp}[1]{%
-  \item[\hskip\labelsep \usekomafont{recipecomp}{#1}]%
+  \item[\hskip\labelsep \usekomafont{recipecomp}{#1\recipecompsep}]%
 }
 %    \end{macrocode}
 % \end{macro}
