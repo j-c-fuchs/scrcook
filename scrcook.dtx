@@ -105,6 +105,16 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\recipe@comp@define}
+% Makro to define the components of the recipe:
+%    \begin{macrocode}
+\newcommand{\recipe@comp@define}{%
+  \newcommand{\ingredients}{\recipecomp{Ingredients}}%
+  \newcommand{\preparation}{\recipecomp{Preparation}}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{recipe}
 % Define the recipe environment, the most important element of the
 % package.
@@ -112,8 +122,7 @@
 \newenvironment{recipe}[1]{%
   #1%
   \begin{trivlist}%
-    \newcommand{\ingredients}{\recipecomp{Ingredients}}%
-    \newcommand{\preparation}{\recipecomp{Preparation}}%
+    \recipe@comp@define
 }{%
   \end{trivlist}%
 }
