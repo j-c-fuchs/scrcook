@@ -31,6 +31,8 @@
 \documentclass{ltxdoc}
 \usepackage{scrextend}
 \usepackage{scrcook}
+\usepackage{booktabs}
+\usepackage{multicol}
 \usepackage{hyperref}
 \EnableCrossrefs
 \CodelineIndex
@@ -90,6 +92,54 @@
 % Put them under cold water immediately to stop the cooking process.
 % \end{recipe}
 %
+% \subsection{Change the appearance of recipes}
+%
+% \DescribeMacro{recipetitle}
+% \DescribeMacro{recipebody}
+% \DescribeMacro{recipecomp}
+% The fonts of the recipes are controlled with the methods from
+% \textsf{KOMA-Script:}
+% For every recipe element, there is a |komafont|.
+% A style command can be added using |\addtokomafont|;
+% \textit{e.\,g.\@}
+% \begin{verbatim}
+%   \addtokomafont{recipetitle}{\sffamily}
+% \end{verbatim}
+% will make the title \textsf{sans-serif.}
+% The font can also be completely changed with |\setkomafont|, thus,
+% \begin{verbatim}
+%   \addtokomafont{recipecomp}{\sffamily}
+% \end{verbatim}
+% will make the recipe components \textsf{sans-serif,} but will drop all
+% previous formatting (|\itshape| in this case).
+% All fonts and default definitions are listed in
+% tab.~\ref{tab:recipefonts}.
+% \begin{table}[htbp]
+%   \centering
+%   \caption{Fonts of the recipe elements.}
+%   \label{tab:recipefonts}
+%   \vspace{\abovecaptionskip}
+%   \begin{tabular}{ccc}
+%     \toprule
+%     fontname &
+%       default &
+%       description \\
+%     \cmidrule(lr){1-1} \cmidrule(lr){2-2} \cmidrule(lr){3-3}
+%     |recipetitle| &
+%       |\normalfont\bfseries| &
+%       title of the recipe \\
+%     |recipebody| &
+%       |\normalfont| &
+%       text of the recipe \\
+%     |recipecomp| &
+%       |\itshape| &
+%       \parbox[t]{.35\linewidth}{\centering
+%         components of the recipe \\
+%         (ingredients etc.)} \\
+%     \bottomrule
+%   \end{tabular}
+% \end{table}
+%
 % \section{Implementation}
 % \label{sec:implementation}
 %
@@ -99,9 +149,19 @@
 %<*package>
 %    \end{macrocode}
 %
+% \begin{macro}{recipetitle,recipecomp,recipebody}
+%    \begin{macrocode}
+\newkomafont{recipetitle}{\normalfont\bfseries}
+\newkomafont{recipecomp}{\itshape}
+\newkomafont{recipebody}{\normalfont}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\recipecomp}
 %    \begin{macrocode}
-\newcommand{\recipecomp}[1]{\item[\hskip\labelsep #1]}
+\newcommand{\recipecomp}[1]{%
+  \item[\hskip\labelsep \usekomafont{recipecomp}{#1}]%
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -120,9 +180,10 @@
 % package.
 %    \begin{macrocode}
 \newenvironment{recipe}[1]{%
-  #1%
+  \usekomafont{recipetitle}{#1}%
   \begin{trivlist}%
     \recipe@comp@define
+    \usekomafont{recipebody}
 }{%
   \end{trivlist}%
 }
