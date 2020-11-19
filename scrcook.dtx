@@ -29,6 +29,8 @@
 %
 %<*driver>
 \documentclass{ltxdoc}
+\usepackage{scrextend}
+\usepackage{scrcook}
 \usepackage{hyperref}
 \EnableCrossrefs
 \CodelineIndex
@@ -52,7 +54,7 @@
 %
 % \begin{abstract}
 %   This package adds support for cooking recipes within
-%   KOMA-Script classes.
+%   \textsf{KOMA-Script} classes.
 % \end{abstract}
 %
 % \section{Introduction}
@@ -64,6 +66,30 @@
 % \section{Usage}
 % \label{sec:usage}
 %
+% This package must be used with one of the \textsf{KOMA-Script} classes
+% such as \textsf{scrarctl,} \textsf{scrreprt,} \textsf{scrbook} or
+% \textsf{scrlttr2}.
+% If you don't use them, use at least the \textsf{scrextend} package.
+% Otherwise, there might be strange errors such as \texttt{command not
+% found} etc.
+%
+% \subsection{Tutorial: How to write a recipe}
+%
+% \DescribeEnv{recipe}
+% \DescribeMacro{\ingredients}
+% \DescribeMacro{\preparation}
+%
+% \begin{recipe}{Boiled eggs}
+% \ingredients
+% 2 eggs
+% \preparation
+% Boil some water.
+% Put the eggs in the water, they should be totally covered.
+% Boil the for 6--8\,min or 8--10\,min,
+% depending on whether you want them to be soft- or hard-boiled.
+% Put them under cold water immediately to stop the cooking process.
+% \end{recipe}
+%
 % \section{Implementation}
 % \label{sec:implementation}
 %
@@ -72,6 +98,27 @@
 %    \begin{macrocode}
 %<*package>
 %    \end{macrocode}
+%
+% \begin{macro}{\recipecomp}
+%    \begin{macrocode}
+\newcommand{\recipecomp}[1]{\item[\hskip\labelsep #1]}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{recipe}
+% Define the recipe environment, the most important element of the
+% package.
+%    \begin{macrocode}
+\newenvironment{recipe}[1]{%
+  #1%
+  \begin{trivlist}%
+    \newcommand{\ingredients}{\recipecomp{Ingredients}}%
+    \newcommand{\preparation}{\recipecomp{Preparation}}%
+}{%
+  \end{trivlist}%
+}
+%    \end{macrocode}
+% \end{macro}
 %
 %    \begin{macrocode}
 %</package>
