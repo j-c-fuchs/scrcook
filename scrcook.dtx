@@ -184,10 +184,10 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\recipe@comp@define}
+% \begin{macro}{\recipe@comp@defs}
 % Makro to define the components of the recipe:
 %    \begin{macrocode}
-\newcommand{\recipe@comp@define}{%
+\newcommand{\recipe@comp@defs}{%
   \newcommand{\ingredients}{\recipecomp{Ingredients}}%
   \newcommand{\preparation}{\recipecomp{Preparation}}%
 }
@@ -201,7 +201,7 @@
 \newenvironment{recipe}[1]{%
   \usekomafont{recipetitle}{#1}%
   \begin{trivlist}%
-    \recipe@comp@define
+    \recipe@comp@defs
     \usekomafont{recipebody}
 }{%
   \end{trivlist}%
