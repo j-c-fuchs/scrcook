@@ -163,6 +163,15 @@
 % and the mentioned macros set the corresponding spacings for the
 % |trivlist|.
 %
+% \subsection{Change the recipe title}
+%
+% The title of the recipe is typeset using the |\recipetitle| command.
+% If you want to change it, \textit{e.\,g.\@} to make it a subsection,
+% you can use
+% \begin{verbatim}
+%   \renewcommand{\recipetitle}{\subsection}
+% \end{verbatim}
+%
 % \section{Implementation}
 % \label{sec:implementation}
 %
@@ -177,6 +186,20 @@
 \newkomafont{recipetitle}{\normalfont\bfseries}
 \newkomafont{recipecomp}{\itshape}
 \newkomafont{recipebody}{\normalfont}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\recipetitle}
+% The following code is analogous to the definition of the |\minisec|
+% macro of \textsf{scrbook.}
+%    \begin{macrocode}
+\newcommand{\recipetitle}[1]{%
+  {\parindent \z@
+    \raggedright\normalfont\nobreak
+    \usekomafont{recipetitle}{\nobreak\interlinepenalty \@M #1\par\nobreak}%
+  }\nobreak
+  \@afterheading
+}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -230,7 +253,7 @@
 % package.
 %    \begin{macrocode}
 \newenvironment{recipe}[1]{%
-  \usekomafont{recipetitle}{#1}%
+  \recipetitle{#1}%
   \recipe@space@defs%
   \begin{trivlist}%
     \recipe@comp@defs
