@@ -213,7 +213,15 @@
 % macro of \textsf{scrbook.}
 %    \begin{macrocode}
 \newcommand{\recipetitle}[1]{%
+  \par
+  \@afterindentfalse
+  \if@nobreak
+    \everypar{}%
+  \else
+    \addpenalty\@secpenalty\addvspace{1.5ex}%
+  \fi
   {\parindent \z@
+    \setlength{\parfillskip}{\z@ plus 1fil}
     \raggedrecipetitle\normalfont\nobreak
     \usekomafont{recipetitle}{\nobreak\interlinepenalty \@M #1\par\nobreak}%
   }\nobreak
