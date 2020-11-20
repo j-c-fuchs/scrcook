@@ -153,6 +153,16 @@
 % for this example, it is better to also remove the space between the
 % recipe components and the text.}
 %
+% \DescribeMacro{\recipetopsep}
+% \DescribeMacro{\recipepartopsep}
+% \DescribeMacro{\recipeitemsep}
+% The vertical spacing can be controlled by redefining the
+% |\recipetopsep|, |\recipepartopsep| and |\recipeitemsep| macros.
+% Internally, the recipe is implemented as |trivlist|
+% (where every component is a new item)
+% and the mentioned macros set the corresponding spacings for the
+% |trivlist|.
+%
 % \section{Implementation}
 % \label{sec:implementation}
 %
@@ -194,12 +204,34 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{recipe spacing}
+% Spacing commands (which can be modified by the users):
+%    \begin{macrocode}
+\newcommand{\recipetopsep}{\parskip}%
+\newcommand{\recipepartopsep}{\z@skip}%
+\newcommand{\recipeitemsep}{\parskip}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\recipe@space@defs}
+% Makro to define the spacings for the recipe,
+% internally implemented as list (see below):
+%    \begin{macrocode}
+\newcommand{\recipe@space@defs}{%
+  \setlength{\topsep}{\recipetopsep}%
+  \setlength{\partopsep}{\recipepartopsep}%
+  \setlength{\itemsep}{\recipeitemsep}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{recipe}
 % Define the recipe environment, the most important element of the
 % package.
 %    \begin{macrocode}
 \newenvironment{recipe}[1]{%
   \usekomafont{recipetitle}{#1}%
+  \recipe@space@defs%
   \begin{trivlist}%
     \recipe@comp@defs
     \usekomafont{recipebody}
