@@ -81,17 +81,40 @@
 % \DescribeEnv{recipe}
 % \DescribeMacro{\ingredients}
 % \DescribeMacro{\preparation}
-%
+% Recipes are typeset using the |recipe| environment.
+% Let's write a simple recipe:
+% \begin{verbatim}
+%   \begin{recipe}{Boiled eggs}
+%     \ingredients
+%     2 eggs
+%     \preparation
+%     Boil some water.
+%     Put the eggs in the water such that they are fully covered.
+%     Boil them for 6--8\,min or 8--10\,min,
+%     depending on whether you want them to be soft- or hard-boiled.
+%     Put them under cold water immediately to stop the cooking process.
+%   \end{recipe}
+% \end{verbatim}
+% This is typeset as:
 % \begin{recipe}{Boiled eggs}
-% \ingredients
-% 2 eggs
-% \preparation
-% Boil some water.
-% Put the eggs in the water, they should be totally covered.
-% Boil the for 6--8\,min or 8--10\,min,
-% depending on whether you want them to be soft- or hard-boiled.
-% Put them under cold water immediately to stop the cooking process.
+%   \ingredients
+%   2 eggs
+%   \preparation
+%   Boil some water.
+%   Put the eggs in the water such that they are fully covered.
+%   Boil them for 6--8\,min or 8--10\,min,
+%   depending on whether you want them to be soft- or hard-boiled.
+%   Put them under cold water immediately to stop the cooking process.
 % \end{recipe}
+% As you can see, the recipes have the following structure:
+% \begin{verbatim}
+%   \begin{recipe}{<title of the recipe>}
+%     \ingredients
+%     <ingredients>
+%     \preparation
+%     <instructions for preparations>
+%   \end{recipe}
+% \end{verbatim}
 %
 % \subsection{Change the appearance of recipes}
 %
