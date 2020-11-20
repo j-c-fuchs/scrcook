@@ -178,12 +178,34 @@
 %
 % \subsection{Change the recipe title}
 %
+% \DescribeMacro{recipetitle}
 % The title of the recipe is typeset using the |\recipetitle| command.
 % If you want to change it, \textit{e.\,g.\@} to make it a subsection,
 % you can use
 % \begin{verbatim}
 %   \renewcommand{\recipetitle}{\subsection}
 % \end{verbatim}
+%
+% \DescribeEnv{recipebody}
+% If you want to show additional information in the title on the right,
+% you can define a new title command \textit{e.\,g.\@} like
+% \begin{verbatim}
+%   \newcommand{\myrecipetitle}[2]{%
+%     \recipetitle{#1\hfill{\mdseries\itshape #2}}
+%   }
+% \end{verbatim}
+% (or use a modification of the |\recipetitle| implementation below).
+% However, the |recipe| environment only accepts one argument.
+% This problem can be overcome by defining a new environment as follows
+% \begin{verbatim}
+%   \newenvironment{\myrecipe}[2]{%
+%   \myrecipetitle{#1}{#2}%
+%   \begin{recipebody}%
+% }{%
+%   \end{recipebody}%
+% }
+% \end{verbatim}
+% since the recipe body is implemented in the |recipebody| environment.
 %
 % \section{Implementation}
 % \label{sec:implementation}
@@ -275,19 +297,27 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{recipe}
-% Define the recipe environment, the most important element of the
-% package.
+% \begin{macro}{recipebody}
+% Define the environment for the body of the recipe.
 %    \begin{macrocode}
-\newenvironment{recipe}[1]{%
-  \recipetitle{#1}%
+\newenvironment{recipebody}{%
   \recipe@space@defs%
   \begin{trivlist}%
-    \recipe@comp@defs
-    \usekomafont{recipebody}
+    \recipe@comp@defs%
+    \usekomafont{recipebody}%
 }{%
   \end{trivlist}%
 }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{recipe}
+% Finally, define the recipe environment---the heart of this package.
+%    \begin{macrocode}
+\newenvironment{recipe}[1]{%
+  \recipetitle{#1}%
+  \begin{recipebody}%
+}{\end{recipebody}}
 %    \end{macrocode}
 % \end{macro}
 %
