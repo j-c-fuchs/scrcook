@@ -163,6 +163,19 @@
 % and the mentioned macros set the corresponding spacings for the
 % |trivlist|.
 %
+% \DescribeMacro{\raggedrecipetitle}
+% The alignment of the recipe title is controlled by
+% |\raggedrecipetitle|.
+% To make it appear on the left on odd pages and on the right on even
+% pages, use
+% \begin{verbatim}
+%   \renewcommand{\raggedrecipetitle}{%
+%     \Ifthispageodd{\raggedleft}{\raggedright}%
+%   }
+% \end{verbatim}
+% (note that this relies on the macro |\Ifthispageodd|
+% from \textsf{KOMA-Script}).
+%
 % \subsection{Change the recipe title}
 %
 % The title of the recipe is typeset using the |\recipetitle| command.
@@ -189,13 +202,19 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\raggedrecipetitle}
+%    \begin{macrocode}
+\newcommand{\raggedrecipetitle}{\raggedright}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\recipetitle}
 % The following code is analogous to the definition of the |\minisec|
 % macro of \textsf{scrbook.}
 %    \begin{macrocode}
 \newcommand{\recipetitle}[1]{%
   {\parindent \z@
-    \raggedright\normalfont\nobreak
+    \raggedrecipetitle\normalfont\nobreak
     \usekomafont{recipetitle}{\nobreak\interlinepenalty \@M #1\par\nobreak}%
   }\nobreak
   \@afterheading
