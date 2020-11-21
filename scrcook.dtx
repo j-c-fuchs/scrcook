@@ -210,6 +210,12 @@
 % \DescribeMacro{\recipename}
 % \DescribeMacro{\ingredientsname}
 % \DescribeMacro{\preparationname}
+% \DescribeMacro{\recipeintroname}
+% \DescribeMacro{\recipenotename}
+% \DescribeMacro{\servingsname}
+% \DescribeMacro{\servingsprename}
+% \DescribeMacro{\recipetimename}
+% \DescribeMacro{\nutritionalvaluename}
 % The name of the different components of the recipe are provided using
 % |\ingredientsname| etc.
 % There is also the command |\recipename| for the name of a recipe.
@@ -305,10 +311,22 @@
 %    \begin{macrocode}
 \providecaptionname{english}{\recipename}{recipe}
 \providecaptionname{german,ngerman,austrian,naustrian,swissgerman,nswissgerman}{\recipename}{Rezept}
+\providecaptionname{english}{\recipeintroname}{Introduction}
+\providecaptionname{german,ngerman,austrian,naustrian,swissgerman,nswissgerman}{\recipeintroname}{Einleitung}
 \providecaptionname{english}{\ingredientsname}{Ingredients}
 \providecaptionname{german,ngerman,austrian,naustrian,swissgerman,nswissgerman}{\ingredientsname}{Zutaten}
 \providecaptionname{english}{\preparationname}{Preparation}
 \providecaptionname{german,ngerman,austrian,naustrian,swissgerman,nswissgerman}{\preparationname}{Zubereitung}
+\providecaptionname{english}{\recipenotename}{Note}
+\providecaptionname{german,ngerman,austrian,naustrian,swissgerman,nswissgerman}{\recipenotename}{Anmerkung}
+\providecaptionname{english}{\servingsname}{servings}
+\providecaptionname{german,ngerman,austrian,naustrian,swissgerman,nswissgerman}{\servingsname}{Portionen}
+\providecaptionname{english}{\servingsprename}{for}
+\providecaptionname{german,ngerman,austrian,naustrian,swissgerman,nswissgerman}{\servingsprename}{für}
+\providecaptionname{english}{\recipetimename}{recipetime}
+\providecaptionname{german,ngerman,austrian,naustrian,swissgerman,nswissgerman}{\recipetimename}{Zeit bis Servierung}
+\providecaptionname{english}{\nutritionalvaluename}{Nutritional value}
+\providecaptionname{german,ngerman,austrian,naustrian,swissgerman,nswissgerman}{\nutritionvaluename}{Nährwert}
 %    \end{macrocode}
 % \end{macro}
 %
@@ -332,6 +350,11 @@
 \newcommand{\recipe@comp@defs}{%
   \newcommand{\ingredients}{\recipecomp{\ingredientsname}}%
   \newcommand{\preparation}{\recipecomp{\preparationname}}%
+  \newcommand{\recipeintro}{\recipecomp{\recipeintroname}}%
+  \newcommand{\recipenote}{\recipecomp{\recipenotename}}%
+  \newcommand{\servings}{\recipecomp{\servingsname}}%
+  \newcommand{\recipetime}{\recipecomp{\recipetimename}}%
+  \newcommand{\nutritionalvalue}{\recipecomp{\nutritionalvaluename}}%
 }
 %    \end{macrocode}
 % \end{macro}
