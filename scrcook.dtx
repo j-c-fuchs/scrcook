@@ -205,6 +205,25 @@
 % (note that this relies on the macro |\Ifthispageodd|
 % from \textsf{KOMA-Script}).
 %
+% \subsection{Language support}
+%
+% \DescribeMacro{\recipename}
+% \DescribeMacro{\ingredientsname}
+% \DescribeMacro{\preparationname}
+% The name of the different components of the recipe are provided using
+% |\ingredientsname| etc.
+% There is also the command |\recipename| for the name of a recipe.
+% These are currently only supported for \textsf{english} and the german
+% languages \textsf{german, ngerman, austrian, naustrian, siwssgerman}
+% and \textsf{nswissgerman.}
+%
+% The user can provide additional languages with the command
+% \begin{verbatim}
+%   \providecaptionname{<language list>}{<term>}{<definition>}
+% \end{verbatim}
+% from \textsf{KOMA-Script.}
+% See the \textsf{KOMA-Script} documentation for more info.
+%
 % \subsection{Change the recipe title}
 %
 % \DescribeMacro{recipetitle}
@@ -281,6 +300,18 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\recipename}
+% Add language support for the diffent components.
+%    \begin{macrocode}
+\providecaptionname{english}{\recipename}{recipe}
+\providecaptionname{german,ngerman,austrian,naustrian,swissgerman,nswissgerman}{\recipename}{Rezept}
+\providecaptionname{english}{\ingredientsname}{Ingredients}
+\providecaptionname{german,ngerman,austrian,naustrian,swissgerman,nswissgerman}{\ingredientsname}{Zutaten}
+\providecaptionname{english}{\preparationname}{Preparation}
+\providecaptionname{german,ngerman,austrian,naustrian,swissgerman,nswissgerman}{\preparationname}{Zubereitung}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\recipecompsep}
 %    \begin{macrocode}
 \newcommand{\recipecompsep}{:}
@@ -299,8 +330,8 @@
 % Makro to define the components of the recipe:
 %    \begin{macrocode}
 \newcommand{\recipe@comp@defs}{%
-  \newcommand{\ingredients}{\recipecomp{Ingredients}}%
-  \newcommand{\preparation}{\recipecomp{Preparation}}%
+  \newcommand{\ingredients}{\recipecomp{\ingredientsname}}%
+  \newcommand{\preparation}{\recipecomp{\preparationname}}%
 }
 %    \end{macrocode}
 % \end{macro}
