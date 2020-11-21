@@ -186,6 +186,12 @@
 % and the mentioned macros set the corresponding spacings for the
 % |trivlist|.
 %
+% \DescribeMacro{\recipeitemindent}
+% \DescribeMacro{\recipelabelwidth}
+% \DescribeMacro{\recipelabelsep}
+% Analogously, the horizontal spacing can be controlled by redefining
+% |\recipeitemindent|, |\recipelabelwidth| and |\recipelabelsep|.
+%
 % \DescribeMacro{\raggedrecipetitle}
 % The alignment of the recipe title is controlled by
 % |\raggedrecipetitle|.
@@ -299,12 +305,21 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{recipe spacing}
-% Spacing commands (which can be modified by the users):
+% \begin{macro}{vertical spacing}
+% Macros for vertical spacing (which can be modified by the users):
 %    \begin{macrocode}
 \newcommand{\recipetopsep}{\parskip}%
 \newcommand{\recipepartopsep}{\medskipamount}%
 \newcommand{\recipeitemsep}{\parskip}%
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{horizontal spacing}
+% Macros for horizontal spacing (which can be modified by the users):
+%    \begin{macrocode}
+\newcommand{\recipeitemindent}{\z@}%
+\newcommand{\recipelabelwidth}{\z@}%
+\newcommand{\recipelabelsep}{\labelsep}%
 %    \end{macrocode}
 % \end{macro}
 %
@@ -325,6 +340,9 @@
 %    \begin{macrocode}
 \newcommand{\recipe@inner@space@defs}{%
   \setlength{\itemsep}{\recipeitemsep}%
+  \setlength{\itemindent}{\recipeitemindent}%
+  \setlength{\labelwidth}{\recipelabelwidth}%
+  \setlength{\labelsep}{\recipelabelsep}%
 }
 %    \end{macrocode}
 % \end{macro}
