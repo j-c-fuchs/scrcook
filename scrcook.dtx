@@ -308,13 +308,22 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\recipe@space@defs}
-% Makro to define the spacings for the recipe,
-% internally implemented as list (see below):
+% \begin{macro}{\recipe@outer@space@defs}
+% Makro to define the spacings for the recipe \emph{before} starting the
+% recipe list:
 %    \begin{macrocode}
-\newcommand{\recipe@space@defs}{%
+\newcommand{\recipe@outer@space@defs}{%
   \setlength{\topsep}{\recipetopsep}%
   \setlength{\partopsep}{\recipepartopsep}%
+}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\recipe@inner@space@defs}
+% Makro to define the spacings for the recipe \emph{after} starting the
+% recipe list:
+%    \begin{macrocode}
+\newcommand{\recipe@inner@space@defs}{%
   \setlength{\itemsep}{\recipeitemsep}%
 }
 %    \end{macrocode}
@@ -324,8 +333,9 @@
 % Define the environment for the body of the recipe.
 %    \begin{macrocode}
 \newenvironment{recipebody}{%
-  \recipe@space@defs%
+  \recipe@outer@space@defs%
   \begin{trivlist}%
+    \recipe@inner@space@defs%
     \recipe@comp@defs%
     \usekomafont{recipebody}%
 }{%
