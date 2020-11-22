@@ -218,17 +218,42 @@
 % \DescribeMacro{\nutritionalvaluename}
 % The name of the different components of the recipe are provided using
 % |\ingredientsname| etc.
-% There is also the command |\recipename| for the name of a recipe.
+% All names and their meaning are listed in table~\ref{tab:names}.
 % These are currently only supported for \textsf{english} and the german
 % languages \textsf{german, ngerman, austrian, naustrian, siwssgerman}
 % and \textsf{nswissgerman.}
+% \begin{table}[htbp]
+%   \centering
+%   \caption{Language-dependent names added by this package.}
+%   \label{tab:names}
+%   \vspace{\abovecaptionskip}
+%   \begin{tabular}{cc}
+%     \toprule
+%     name & description \\
+%     \cmidrule(lr){1-1} \cmidrule(lr){2-2}
+%     |\recipename| & Name of the recipe \\
+%     |\ingredientsname| & ingredients list \\
+%     |\preparationname| & preparation instructions \\
+%     |\recipeintroname| & introduction \\
+%     |\recipenotename| & note (tipps, variants etc.) \\
+%     |\servingsname| & number of servings \\
+%     |\servingsprename| & term before number of servings \\
+%     |\recipetimename| & total time until serving \\
+%     |\nutritionalvaluename| & nutritional value \\
+%     \bottomrule
+%   \end{tabular}
+% \end{table}
 %
-% The user can provide additional languages with the command
+% The user can provide additional languages and terms with the command
 % \begin{verbatim}
 %   \providecaptionname{<language list>}{<term>}{<definition>}
 % \end{verbatim}
 % from \textsf{KOMA-Script.}
 % See the \textsf{KOMA-Script} documentation for more info.
+% One can also redefine such names with
+% \begin{verbatim}
+%   \renewcaptionname{<language list>}{<term>}{<definition>}
+% \end{verbatim}
 %
 % \subsection{Change the recipe title}
 %
