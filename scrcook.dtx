@@ -394,9 +394,13 @@
 \newcommand{\recipe@comp@defs}{%
   \newcommand{\ingredients}{\recipecomp{\ingredientsname}}%
   \newcommand{\preparation}{\recipecomp{\preparationname}}%
-  \newcommand{\recipeintro}{\recipecomp{\recipeintroname}}%
+  \newcommand{\@recipeintro}{\recipecomp{\recipeintroname}}%
+  \newcommand{\@@recipeintro}{\item}%
+  \newcommand{\recipeintro}{\@ifstar\@@recipeintro\@recipeintro}%
   \newcommand{\recipenote}{\recipecomp{\recipenotename}}%
-  \newcommand{\servings}{\recipecomp{\servingsname}}%
+  \newcommand{\@servings}{\recipecomp{\servingsname}}%
+  \newcommand{\@@servings}[1]{\recipecomp@nosep{\servingsprename\ ##1 \servingspostname}}%
+  \newcommand{\servings}{\@ifstar\@@servings\@servings}%
   \newcommand{\recipetime}{\recipecomp{\recipetimename}}%
   \newcommand{\nutritionalvalue}{\recipecomp{\nutritionalvaluename}}%
 }
