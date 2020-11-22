@@ -83,18 +83,18 @@
 % \DescribeMacro{\preparation}
 % Recipes are typeset using the |recipe| environment.
 % Let's write a simple recipe:
-% \begin{verbatim}
-%   \begin{recipe}{Boiled eggs}
-%     \ingredients
-%     2 eggs
-%     \preparation
-%     Boil some water.
-%     Put the eggs in the water such that they are fully covered.
-%     Boil them for 6--8\,min or 8--10\,min,
-%     depending on whether you want them to be soft- or hard-boiled.
-%     Put them under cold water immediately to stop the cooking process.
-%   \end{recipe}
-% \end{verbatim}
+%\begin{verbatim}
+%  \begin{recipe}{Boiled eggs}
+%    \ingredients
+%    2 eggs
+%    \preparation
+%    Boil some water.
+%    Put the eggs in the water such that they are fully covered.
+%    Boil them for 6--8\,min or 8--10\,min,
+%    depending on whether you want them to be soft- or hard-boiled.
+%    Put them under cold water immediately to stop the cooking process.
+%  \end{recipe}
+%\end{verbatim}
 % This is typeset as:
 % \begin{recipe}{Boiled eggs}
 %   \ingredients
@@ -107,14 +107,14 @@
 %   Put them under cold water immediately to stop the cooking process.
 % \end{recipe}
 % As you can see, the recipes have the following structure:
-% \begin{verbatim}
-%   \begin{recipe}{<title of the recipe>}
-%     \ingredients
-%     <ingredients>
-%     \preparation
-%     <instructions for preparations>
-%   \end{recipe}
-% \end{verbatim}
+%\begin{verbatim}
+%  \begin{recipe}{<title of the recipe>}
+%    \ingredients
+%    <ingredients>
+%    \preparation
+%    <instructions for preparations>
+%  \end{recipe}
+%\end{verbatim}
 %
 % \subsection{Change the appearance of recipes}
 %
@@ -126,14 +126,14 @@
 % For every recipe element, there is a |komafont|.
 % A style command can be added using |\addtokomafont|;
 % \textit{e.\,g.\@}
-% \begin{verbatim}
-%   \addtokomafont{recipetitle}{\sffamily}
-% \end{verbatim}
+%\begin{verbatim}
+%  \addtokomafont{recipetitle}{\sffamily}
+%\end{verbatim}
 % will make the title \textsf{sans-serif.}
 % The font can also be completely changed with |\setkomafont|, thus,
-% \begin{verbatim}
-%   \addtokomafont{recipecomp}{\sffamily}
-% \end{verbatim}
+%\begin{verbatim}
+%  \addtokomafont{recipecomp}{\sffamily}
+%\end{verbatim}
 % will make the recipe components \textsf{sans-serif,} but will drop all
 % previous formatting (|\itshape| in this case).
 % All fonts and default definitions are listed in
@@ -168,9 +168,9 @@
 % The recipe components are indicated by a separator,
 % a colon \enquote{:} by default.
 % The separator can be changed using |\renewcommand|:
-% \begin{verbatim}
-%   \renewcommand{\recipecompsep}{---}
-% \end{verbatim}
+%\begin{verbatim}
+%  \renewcommand{\recipecompsep}{---}
+%\end{verbatim}
 % makes |\ingredients| print
 % \enquote{\usekomafont{recipecomp}{Ingredients---}}.\footnote{Note that
 % for this example, it is better to also remove the space between the
@@ -197,11 +197,11 @@
 % |\raggedrecipetitle|.
 % To make it appear on the left on odd pages and on the right on even
 % pages, use
-% \begin{verbatim}
-%   \renewcommand{\raggedrecipetitle}{%
-%     \Ifthispageodd{\raggedleft}{\raggedright}%
-%   }
-% \end{verbatim}
+%\begin{verbatim}
+%  \renewcommand{\raggedrecipetitle}{%
+%    \Ifthispageodd{\raggedleft}{\raggedright}%
+%  }
+%\end{verbatim}
 % (note that this relies on the macro |\Ifthispageodd|
 % from \textsf{KOMA-Script}).
 %
@@ -245,15 +245,15 @@
 % \end{table}
 %
 % The user can provide additional languages and terms with the command
-% \begin{verbatim}
-%   \providecaptionname{<language list>}{<term>}{<definition>}
-% \end{verbatim}
+%\begin{verbatim}
+%  \providecaptionname{<language list>}{<term>}{<definition>}
+%\end{verbatim}
 % from \textsf{KOMA-Script.}
 % See the \textsf{KOMA-Script} documentation for more info.
 % One can also redefine such names with
-% \begin{verbatim}
-%   \renewcaptionname{<language list>}{<term>}{<definition>}
-% \end{verbatim}
+%\begin{verbatim}
+%  \renewcaptionname{<language list>}{<term>}{<definition>}
+%\end{verbatim}
 %
 % \subsection{Change the recipe title}
 %
@@ -261,29 +261,29 @@
 % The title of the recipe is typeset using the |\recipetitle| command.
 % If you want to change it, \textit{e.\,g.\@} to make it a subsection,
 % you can use
-% \begin{verbatim}
-%   \renewcommand{\recipetitle}{\subsection}
-% \end{verbatim}
+%\begin{verbatim}
+%  \renewcommand{\recipetitle}{\subsection}
+%\end{verbatim}
 %
 % \DescribeEnv{recipebody}
 % If you want to show additional information in the title on the right,
 % you can define a new title command \textit{e.\,g.\@} like
-% \begin{verbatim}
-%   \newcommand{\myrecipetitle}[2]{%
-%     \recipetitle{#1\hfill{\mdseries\itshape #2}}
-%   }
-% \end{verbatim}
+%\begin{verbatim}
+%  \newcommand{\myrecipetitle}[2]{%
+%    \recipetitle{#1\hfill{\mdseries\itshape #2}}
+%  }
+%\end{verbatim}
 % (or use a modification of the |\recipetitle| implementation below).
 % However, the |recipe| environment only accepts one argument.
 % This problem can be overcome by defining a new environment as follows
-% \begin{verbatim}
-%   \newenvironment{\myrecipe}[2]{%
-%     \myrecipetitle{#1}{#2}%
-%     \begin{recipebody}%
-%   }{%
-%     \end{recipebody}%
-%   }
-% \end{verbatim}
+%\begin{verbatim}
+%  \newenvironment{\myrecipe}[2]{%
+%    \myrecipetitle{#1}{#2}%
+%    \begin{recipebody}%
+%  }{%
+%    \end{recipebody}%
+%  }
+%\end{verbatim}
 % since the recipe body is implemented in the |recipebody| environment.
 %
 % \section{Implementation}
