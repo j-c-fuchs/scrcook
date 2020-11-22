@@ -365,11 +365,26 @@
 %    \end{macrocode}
 % \end{macro}
 %
-% \begin{macro}{\recipecomp}
+% \begin{macro}{\recipecomp@nosep}
+% Component of a recipe without printing |\recipecompsep| at the end.
 %    \begin{macrocode}
-\newcommand{\recipecomp}[1]{%
-  \item[\hskip\labelsep \usekomafont{recipecomp}{#1\recipecompsep}]%
+\newcommand{\recipecomp@nosep}[1]{%
+  \item[\hskip\labelsep \usekomafont{recipecomp}{#1}]%
 }
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\recipecomp@sep}
+% Component of a recipe with |\recipecompsep| at the end.
+%    \begin{macrocode}
+\newcommand{\recipecomp@sep}[1]{\recipecomp@nosep{#1\recipecompsep}}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\recipecomp}
+% Component of a recipe.
+%    \begin{macrocode}
+\newcommand{\recipecomp}{\@ifstar\recipecomp@nosep\recipecomp@sep}
 %    \end{macrocode}
 % \end{macro}
 %
