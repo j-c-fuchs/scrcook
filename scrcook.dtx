@@ -116,6 +116,29 @@
 %    <instructions for preparations>
 %  \end{recipe}
 %\end{verbatim}
+% The Title of the recipe itself is given as argument.
+% The body of a recipe typically consist of different components,
+% \textit{e.\,g.\@} the list of ingredients or the instructions for
+% preparation.
+% Each of these components are started with a command,
+% like |\ingredients| or |\preparation|.
+% \DescribeMacro{\ingredients*}
+% \DescribeMacro{\preparation*}
+% There are also starred versions of these commands which allow for an
+% additional argument:
+%\begin{verbatim}
+%  \ingredients*{for the cake} some ingredients
+%  \ingredients*{for the glaze} some other ingredients
+%  \preparation*{for the cake} some steps
+%  \preparation*{for the glaze} some other steps
+%\end{verbatim}
+% gives:
+% \begin{recipebody}
+%   \ingredients*{for the cake} some ingredients
+%   \ingredients*{for the glaze} some other ingredients
+%   \preparation*{for the cake} some steps
+%   \preparation*{for the glaze} some other steps
+% \end{recipebody}
 %
 % When the \textsf{hyperref} package is used, one can label the recipes
 % and refer to them using the |\nameref| command.
@@ -442,8 +465,12 @@
 % Makro to define the components of the recipe:
 %    \begin{macrocode}
 \newcommand{\recipe@comp@defs}{%
-  \newcommand{\ingredients}{\recipecomp{\ingredientsname}}%
-  \newcommand{\preparation}{\recipecomp{\preparationname}}%
+  \newcommand{\@ingredients}{\recipecomp{\ingredientsname}}%
+  \newcommand{\@@ingredients}[1]{\recipecomp{\ingredientsname\ ##1}}%
+  \newcommand{\ingredients}{\@ifstar\@@ingredients\@ingredients}%
+  \newcommand{\@preparation}{\recipecomp{\preparationname}}%
+  \newcommand{\@@preparation}[1]{\recipecomp{\preparationname\ ##1}}%
+  \newcommand{\preparation}{\@ifstar\@@preparation\@preparation}%
   \newcommand{\@recipeintro}{\recipecomp{\recipeintroname}}%
   \newcommand{\@@recipeintro}{\item}%
   \newcommand{\recipeintro}{\@ifstar\@@recipeintro\@recipeintro}%
