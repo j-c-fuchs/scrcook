@@ -140,6 +140,51 @@
 %   \preparation*{for the glaze} some other steps
 % \end{recipebody}
 %
+% \DescribeMacro{\recipeintro}
+% \DescribeMacro{\recipeintro*}
+% An Introduction can be added with the command |\recipeintro|.
+% If you don't want the text to appear, there is the starred version
+% |\recipeintro*| which prints nothing (and is implemented as a simple
+% |\item|).
+% \DescribeMacro{\item}
+% This means, |\recipeintro*| or |\item| can be used to start another
+% part without a name.
+% \DescribeMacro{\recipenote}
+% To add a note, you can use the |\recipenote| command.
+% \DescribeMacro{\servings}
+% \DescribeMacro{\servings*}
+% The number of servings can be printed using the command |\servings|.
+% For a literal representation, use |\servings*{<number>}|:
+%\begin{verbatim}
+%  \sevings 6
+%  \sevings*{6}
+%\end{verbatim}
+% gives:
+% \begin{recipebody}
+%   \servings 6
+%   \servings*{6}
+% \end{recipebody}
+% \DescribeMacro{\recipetime}
+% \DescribeMacro{\nutritionalvalue}
+% Finally, there are the command |\recipetime| and |\nutritionalvalue|
+% indicating the time and nutritional value.
+%
+% \DescribeMacro{\recipecomp}
+% \DescribeMacro{\recipecomp*}
+% Any other component can also be typeset using the
+% |\recipecomp{<text>}| and |\recipecomp*{<text>}| commands.
+% The difference between these macros is, that |\recipecomp| typesets
+% the separator, \enquote{:} by default, whereas |\recipecomp*| doesn't:
+%\begin{verbatim}
+%  \recipecomp{Special component} some text
+%  \recipecomp*{special note}
+%\end{verbatim}
+% gives:
+% \begin{recipebody}
+%   \recipecomp{Special component} some text
+%   \recipecomp*{special note}
+% \end{recipebody}
+%
 % When the \textsf{hyperref} package is used, one can label the recipes
 % and refer to them using the |\nameref| command.
 % Let's make a recipe for \nameref{recipe:noodles} which is labeled:
