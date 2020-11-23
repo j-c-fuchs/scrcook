@@ -77,6 +77,7 @@
 % found} etc.
 %
 % \subsection{Tutorial: How to write a recipe}
+% \label{sec:tutorial}
 %
 % \DescribeEnv{recipe}
 % \DescribeMacro{\ingredients}
@@ -115,6 +116,38 @@
 %    <instructions for preparations>
 %  \end{recipe}
 %\end{verbatim}
+%
+% When the \textsf{hyperref} package is used, one can label the recipes
+% and refer to them using the |\nameref| command.
+% Let's make a recipe for \nameref{recipe:noodles} which is labeled:
+%\begin{verbatim}
+%  \begin{recipe}{Noodles}
+%    \label{recipe:noodles}
+%    \ingredients
+%    100\,g noodles,
+%    1--2\,tsp.\@ salt
+%    \preparation
+%    Heat water in a pot until boiling.
+%    Add the salt to the water.
+%    Then, add the noodles and cook them until finished (taste them).
+%    Take them out of the water or drain the water with a sieve.
+%  \end{recipe}
+%\end{verbatim}
+% \begin{recipe}{Noodles}
+%   \label{recipe:noodles}
+%   \ingredients
+%   100\,g noodles,
+%   1--2\,tsp.\@ salt
+%   \preparation
+%   Heat water in a pot until boiling.
+%   Add the salt to the water.
+%   Then, add the noodles and cook them until finished (taste them).
+%   Take them out of the water or drain the water with a sieve.
+% \end{recipe}
+% Now, |\nameref{recipe:noodles}| produces \nameref{recipe:noodles}.
+% However, the command |\ref{recipe:noodles}| produces
+% \ref{recipe:noodles} since we are in the section~\ref{sec:tutorial}
+% and the recipes have no counter.
 %
 % \subsection{Change the appearance of recipes}
 %
@@ -311,11 +344,22 @@
 %    \end{macrocode}
 % \end{macro}
 %
+% \begin{macro}{\phantomsection}
+% If |\phantomsection| is not defined (\textit{e.\,g.\@} when
+% \textsf{hyperref} is not loaded), the |\phantomsection| is set to
+% |\relax| to prevent errors.
+%    \begin{macrocode}
+\AtBeginDocument{\@ifundefined{phantomsection}{\let\phantomsection\relax}{}}
+%    \end{macrocode}
+% \end{macro}
+%
 % \begin{macro}{\recipetitle}
 % The following code is analogous to the definition of the |\minisec|
 % macro of \textsf{scrbook.}
 %    \begin{macrocode}
 \newcommand{\recipetitle}[1]{%
+  \phantomsection
+  \protected@edef\@currentlabelname{#1}%
   \par
   \@afterindentfalse
   \if@nobreak
