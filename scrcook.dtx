@@ -25,6 +25,7 @@
 %<*package>
 \NeedsTeXFormat{LaTeX2e}[2005/12/01]
 \ProvidesPackage{scrcook}[2020/11/15 v0.0 Cooking recipe for KOMA-Script classes]
+\RequirePackage{tocbasic}
 %</package>
 %
 %<*driver>
@@ -217,6 +218,10 @@
 % \ref{recipe:noodles} since we are in the section~\ref{sec:tutorial}
 % and the recipes have no counter.
 %
+% \DescribeMacro{\listofrecipes}
+% Finally, a list of recipes can be printed using |\listofrecipes|.
+% You can find an example before the implementation section.
+%
 % \subsection{Change the appearance of recipes}
 %
 % \DescribeMacro{recipetitle}
@@ -394,6 +399,8 @@
 % \textsf{scrcook} is compatible with all \textsf{KOMA-Script} packages.
 % It is also compatible with the \textsf{hyperref} package,
 % but \emph{not} with the \textsf{titleref} and \textsf{zref} packages.
+%
+% \listofrecipes
 %
 % \section{Implementation}
 % \label{sec:implementation}
@@ -591,10 +598,65 @@
 %    \begin{macrocode}
 \newenvironment{recipe}[1]{%
   \recipetitle{#1}%
+  \addcontentsline{lor}{recipe}{#1}%
   \begin{recipebody}%
 }{\end{recipebody}}
 %    \end{macrocode}
 % \end{macro}
+%
+% \subsection{List of recipes}
+%
+% Use extension 'lor' for the list of recipes.
+%    \begin{macrocode}
+\Ifattoclist{lor}{%
+  \PackageError{scrcook}{%
+    extension 'lor' already in use%
+  }{%
+    Each extension may be used only once.\MessageBreak
+    The class or another package already uses
+    extension 'lor'.\MessageBreak
+    This error is fatal!\MessageBreak
+    You should not continue!%
+  }%
+}{%
+  \PackageInfo{scrcook}{using extension 'lor'}%
+}
+\addtotoclist{lor}
+%    \end{macrocode}
+%
+% \begin{macro}{\listoflorname}
+%    \begin{macrocode}
+\newcommand*{\listoflorname}{List of recipes}
+\providecaptionname{english}{\listoflorname}{List of recipes}
+\providecaptionname{german,ngerman,austrian,naustrian,swissgerman,nswissgerman}{\listoflorname}{Verzeichnis der Rezept}
+%    \end{macrocode}
+% \end{macro}
+%
+% \begin{macro}{\listofrecipes}
+% Print the list of recipes.
+%    \begin{macrocode}
+\newcommand*{\listofrecipes}{\listoftoc{lor}}
+%    \end{macrocode}
+% \end{macro}
+%
+% Include the chapters.
+%    \begin{macrocode}
+\setuptoc{lor}{chapteratlist}%
+%    \end{macrocode}
+%
+% Only use one column, also in twocolumn mode.
+%    \begin{macrocode}
+\AtAddToTocList{%
+  \setuptoc{lor}{onecolumn}%
+}
+%    \end{macrocode}
+%
+% Define the format of the entries.
+%    \begin{macrocode}
+\DeclareTOCStyleEntry[%
+  level=1,indent=1.5em,numwidth=1em,%
+]{dottedtocline}{recipe}
+%    \end{macrocode}
 %
 %    \begin{macrocode}
 %</package>
