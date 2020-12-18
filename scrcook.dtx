@@ -438,8 +438,6 @@
 % macro of \textsf{scrbook.}
 %    \begin{macrocode}
 \newcommand{\recipetitle}[1]{%
-  \phantomsection
-  \protected@edef\@currentlabelname{#1}%
   \par
   \@afterindentfalse
   \if@nobreak
@@ -447,6 +445,8 @@
   \else
     \addpenalty\@secpenalty\addvspace{1.5ex}%
   \fi
+  \phantomsection
+  \protected@edef\@currentlabelname{#1}%
   {\parindent \z@
     \setlength{\parfillskip}{\z@ plus 1fil}
     \raggedrecipetitle\normalfont\nobreak
