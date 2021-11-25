@@ -317,6 +317,7 @@
 % \DescribeMacro{\preparationname}
 % \DescribeMacro{\recipeintroname}
 % \DescribeMacro{\recipenotename}
+% \DescribeMacro{\recipevariationname}
 % \DescribeMacro{\servingsname}
 % \DescribeMacro{\servingsprename}
 % \DescribeMacro{\servingspostname}
@@ -342,6 +343,7 @@
 %     |\preparationname| & preparation instructions \\
 %     |\recipeintroname| & introduction \\
 %     |\recipenotename| & note (tipps, variants etc.) \\
+%     |\recipevariationname| & variation (tipps, variants etc.) \\
 %     |\servingsname| & number of servings \\
 %     |\servingsprename| & term before number of servings \\
 %     |\servingspostname| & term after number of servings \\
@@ -470,6 +472,10 @@
 \providecaptionname{german,ngerman,austrian,naustrian,swissgerman,nswissgerman}{\preparationname}{Zubereitung}
 \providecaptionname{english}{\recipenotename}{Note}
 \providecaptionname{german,ngerman,austrian,naustrian,swissgerman,nswissgerman}{\recipenotename}{Anmerkung}
+\providecaptionname{english}{\recipevariationname}{Variation}
+\providecaptionname{german,ngerman,austrian,naustrian,swissgerman,nswissgerman}{\recipevariationname}{Variante}
+\providecaptionname{english}{\recipevariationsname}{Variations}
+\providecaptionname{german,ngerman,austrian,naustrian,swissgerman,nswissgerman}{\recipevariationsname}{Varianten}
 \providecaptionname{english}{\servingsname}{Servings}
 \providecaptionname{german,ngerman,austrian,naustrian,swissgerman,nswissgerman}{\servingsname}{Portionen}
 \providecaptionname{english}{\servingsprename}{for}
@@ -526,6 +532,9 @@
   \newcommand{\@@recipeintro}{\item}%
   \newcommand{\recipeintro}{\@ifstar\@@recipeintro\@recipeintro}%
   \newcommand{\recipenote}{\recipecomp{\recipenotename}}%
+  \newcommand{\@recipevariation}{\recipecomp{\recipevariationsname}}%
+  \newcommand{\@@recipevariation}{\recipecomp{\recipevariationname}}%
+  \newcommand{\recipevariation}{\@ifstar\@@recipevariation\@recipevariation}%
   \newcommand{\@servings}{\recipecomp{\servingsname}}%
   \newcommand{\@@servings}[1]{\recipecomp@nosep{\servingsprename\ ##1 \servingspostname}}%
   \newcommand{\servings}{\@ifstar\@@servings\@servings}%
